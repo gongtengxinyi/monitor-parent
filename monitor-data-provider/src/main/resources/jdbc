@@ -1,0 +1,13 @@
+driver=com.mysql.jdbc.Driver
+url=jdbc:mysql://localhost:3306/cloudplate
+username=root
+password=root
+initialSize=0
+maxActive=20
+maxIdle=20
+minIdle=1
+maxWait=60000
+
+url2=jdbc:mysql://localhost:3306/cloudplate2
+username2=root
+password2=root
