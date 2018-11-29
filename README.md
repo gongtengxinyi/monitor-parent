@@ -46,7 +46,7 @@
 * 启动monitor-openapi项目下的App注册服务消费者；
 * 整个项目即可完整运行。
 
-##关于作者---别忘记给个星星
+## 关于作者
 ```java
   var author = {
     nickName  : "工藤新一",
