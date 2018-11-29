@@ -1,0 +1,94 @@
+Technical intent
+
+O star! O star! It's so important that it should be repeated for three times. If it is useful for your study, please point out a star. Thank you.
+
+This project is mainly to integrate various kinds of popular middleware.
+
+Provides a simple introductory demo for Java beginners (so highlight!!!! ` bar fine or spray detours `).
+
+There are bugs because the author has limited time.
+
+If you have questions, please contact ` ` qq: 1251272104. Or send email to my ` contact m13687672481@163.com `.
+
+Project itself open source, commercial use, please contact the author. At present, in the project development, the functions are gradually improved...
+
+
+Techniques used in the ## project (gradually improved)
+
+
+* spring+springmvc+mybatis with a little springboot
+
+* dubbo micro service practice
+
+* use mybatis do ` depots table `, dynamic switching data source
+
+* rabbitmq message queues for system decoupling
+
+* redis hot data cache + seckill case
+
+* initial use of mongodb
+
+* websocket message push server setup (popup effect + chat room)
+
+* Java and distribute the practice tutorials
+
+* separate auth2+shiro permission validation before and after end
+
+* the backend will learn ` vue. Js ` templated use webpack + NPM
+
+Jenkins continuous integration +docker virtualization deployment
+
+* Nginx load balancing configuration + front and rear end separation deployment
+
+* continue to add
+
+
+
+
+
+
+## has problem feedback
+
+If you have any questions in use, please feel free to give me feedback. You can communicate with me through the following contact information
+
+
+* email (m13687672481@163.com)
+
+* QQ: 1251272104
+
+* WeChat: kenan13687672481
+
+
+
+Project description
+
+* build a set of distributed service framework through mainstream technologies such as dubbo+spring boot+mybatis+redis
+
+* first install zookeeper+redis;
+
+* zookeeper address is configured under dubbo-spring-mybatis.xml, the resource file of the project of monitor-data-provider;
+
+* monitor-openapi service consumer resource file dubbo-services.xml under the configuration of zookeeper address, and then in the application. Properties under the configuration of redis address;
+
+* configure zookeeper address in the resource file dubbo-services.xml of the monitor-security service consumer;
+
+* create the database file XXXX and create the form elements
+
+* start mainloader under the monitor-data-provider project to register the service provider;
+
+* start the App registration service consumer under the monitor-openapi project;
+
+* the whole project can be fully run.
+
+
+About the author -- -don't forget to give me a star
+
+` ` ` Java
+
+Var author = {
+
+NickName: "dingjianeli",
+
+}
+
+` ` `
