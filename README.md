@@ -9,9 +9,9 @@
  
 ## 项目用到的技术（逐步完善）
 
-* spring+springmvc+mybatis 夹杂一点springboot
-* dubbo微服务实践
-* 利用mybatis做`分库分表`，动态切换数据源
+* spring+springmvc+mybatis 夹杂一点springboot（完成）
+* dubbo微服务实践（完成）
+* 利用mybatis做`分库分表`，动态切换数据源 (完成)
 * rabbitmq消息队列进行系统解耦
 * redis热点数据缓存+秒杀案例
 * mongodb初步使用
