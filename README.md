@@ -34,20 +34,17 @@
 * QQ: 1251272104
 * 微信: kenan13687672481
 
-##捐助开发者
-在兴趣的驱动下,写一个`免费`的东西，有欣喜，也还有汗水，希望你喜欢我的作品，同时也能支持一下。
-当然，有钱捧个钱场（右上角的爱心标志，支持支付宝和PayPal捐助），没钱捧个人场，谢谢各位。
 
-##项目讲解
+## 项目讲解
 通过dubbo+spring boot+mybatis+redis等主流技术搭建成一套分布式服务框架
-1、首先安装zookeeper+redis；
-2、monitor-data-provider服务提供者项目的资源文件dubbo-spring-mybatis.xml下配置zookeeper地址；
-3、monitor-openapi服务消费者的资源文件dubbo-services.xml下配置zookeeper地址，然后在application.properties下配置redis地址；
-4、monitor-security服务消费者的资源文件dubbo-services.xml下配置zookeeper地址；
-5、建立数据库文件xxxx，创建表单元素
-6、启动monitor-data-provider项目下的mainloader注册服务提供者；
-7、启动monitor-openapi项目下的App注册服务消费者；
-8、整个项目即可完整运行。
+1、 首先安装zookeeper+redis；
+2、 monitor-data-provider服务提供者项目的资源文件dubbo-spring-mybatis.xml下配置zookeeper地址；
+3、 monitor-openapi服务消费者的资源文件dubbo-services.xml下配置zookeeper地址，然后在application.properties下配置redis地址；
+4、 monitor-security服务消费者的资源文件dubbo-services.xml下配置zookeeper地址；
+5、 建立数据库文件xxxx，创建表单元素
+6、 启动monitor-data-provider项目下的mainloader注册服务提供者；
+7、 启动monitor-openapi项目下的App注册服务消费者；
+8、 整个项目即可完整运行。
 
 ##关于作者---别忘记给个星星
 ```java
