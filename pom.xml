@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.zte-its</groupId>
+    <groupId>com.skyeye</groupId>
     <artifactId>monitor-parent</artifactId>
     <version>1.0.0.0</version>
     <packaging>pom</packaging>
@@ -31,19 +31,47 @@
         <jackson-annotations-version>2.7.3</jackson-annotations-version>
         <spring-session-version>1.1.1.RELEASE</spring-session-version>
         <druid.version>1.0.18</druid.version>
-
+             <aop_version>4.2.4.RELEASE</aop_version>
     </properties>
+    <dependencyManagement>
         <dependencies>
+            <!-- log -->
+            <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
-                <version>1.7.21</version>
+                <version>1.7.25</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
-                <version>1.7.21</version>
+                <version>1.7.25</version>
+                <!-- <scope>test</scope> -->
             </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>1.8.10</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>1.8.6</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${aop_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>4.2.4.RELEASE</version>
+                <scope>compile</scope>
+            </dependency>
+
+
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>dubbo</artifactId>
@@ -193,6 +221,7 @@
                 <version>${spring-session-version}</version>
             </dependency>
         </dependencies>
+    </dependencyManagement>
     <build>
         <pluginManagement>
             <plugins>
@@ -223,6 +252,14 @@
             </plugins>
         </pluginManagement>
     </build>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit-verion}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
     <modules>
         <module>monitor-openapi</module>
         <module>monitor-security</module>

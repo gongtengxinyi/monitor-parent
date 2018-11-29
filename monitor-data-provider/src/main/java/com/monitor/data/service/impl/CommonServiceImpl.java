@@ -16,8 +16,8 @@ public class CommonServiceImpl implements CommonService {
     public String getUserTest() {
         logger.info("进入master方法");
         Security security = securityMapper.selectByPrimaryKey("1");
-        logger.info("进入slave方法");
-        Security security1 = securityMapper.selectByPrimaryKey2("2");
+//        logger.info("进入slave方法");
+//        Security security1 = securityMapper.selectByPrimaryKey2("2");
         return "";
     }
 }

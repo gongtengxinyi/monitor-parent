@@ -10,8 +10,6 @@
     </parent>
     <artifactId>monitor-data-provider</artifactId>
     <dependencies>
-
-
         <dependency>
             <groupId>com.skyeye</groupId>
             <artifactId>monitor-data-api</artifactId>

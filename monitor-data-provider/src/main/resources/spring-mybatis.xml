@@ -11,7 +11,7 @@
   http://www.springframework.org/schema/mvc  
   http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 	<!-- 自动扫描 -->
-	<!-- <context:component-scan base-package="com.dearbinge" /> -->
+	 <context:component-scan base-package="com.monitor.data.splitTable" />
 	<!-- 引入配置文件 -->
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -71,6 +71,9 @@
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自动扫描mapping.xml文件 -->
 		<property name="mapperLocations" value="com/monitor/data/mapping/*.xml"></property>
+
+		<property name="configLocation"  value="classpath:mybatis-config.xml"/>
+
 	</bean>
 	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -97,5 +100,20 @@
 			<aop:before pointcut-ref="dataSourcePointcut" method="intercept" />
 		</aop:aspect>
 	</aop:config>
+
+
+
+	<!-- 配置分表策略 -->
+	<bean id="strategyManager" class="com.monitor.data.splitTable.StrategyManager">
+		<property name="strategies">
+			<map>
+				<entry key="YYYY" value="com.monitor.data.splitTable.YYYYStrategy" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="contextHelper" class="com.monitor.data.splitTable.ContextHelper">
+	</bean>
+
 
 </beans>
