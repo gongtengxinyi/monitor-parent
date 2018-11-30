@@ -16,28 +16,12 @@
 		(2)提供一些列：数据绑定，数字和日期的format @NumberFormat, @DateTimeFormat, xml,json默认读写支持 
 	-->
 	<mvc:annotation-driven />
-	
-	<!-- 2.静态资源默认servlet配置
-		(1)加入对静态资源的处理：js,gif,png
-		(2)允许使用"/"做整体映射
-	 -->
 	 <mvc:default-servlet-handler/>
-	 
-	 <!-- 3.配置jsp 显示ViewResolver -->
-	 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-	 	<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-	 	<property name="prefix" value="/WEB-INF/jsp/" />
-	 	<property name="suffix" value=".jsp" />
-	 </bean>
-	 
 	 <!-- 4.扫描web相关的bean -->
-	 <!--<context:component-scan base-package="com.monitor.job.jobhandler" />-->
-
+	 <context:component-scan base-package="com.monitor.sso" />
 
 	<!-- xml 配置文件， 对外发布的service接口部分 -->
 	<import resource="classpath*:/application-all.xml" />
-    <!--xxl-job环境配置-->
-    <import resource="classpath:/applicationcontext-xxl-job.xml" />
 
 
 </beans>

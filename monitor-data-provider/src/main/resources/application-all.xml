@@ -19,6 +19,7 @@
 	<!--</bean>-->
 
 	<context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="true" />
+	<context:property-placeholder location="classpath:redis.properties" ignore-unresolvable="true" />
 
 	<bean id="dataSource" class=" com.monitor.data.framework.ThreadLocalRountingDataSource">
 		<property name="defaultTargetDataSource" ref="dataSource_master" />
@@ -115,6 +116,7 @@
 
 	<bean id="contextHelper" class="com.monitor.data.splitTable.ContextHelper">
 	</bean>
-
+     <!--引入redis-->
+	<import resource="classpath:/spring-redis.xml" />
 
 </beans>
