@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * job code controller
+ * job code jobhandler
  * @author xuxueli 2015-12-19 16:13:16
  */
 @Controller

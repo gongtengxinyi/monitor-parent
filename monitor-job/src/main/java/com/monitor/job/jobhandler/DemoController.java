@@ -1,4 +1,4 @@
-package com.monitor.job.controller;
+package com.monitor.job.jobhandler;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

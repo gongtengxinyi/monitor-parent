@@ -266,7 +266,7 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
       return words.propertyIsEnumerable(word);
     }
   }
-  var cKeywords = "auto if break case register continue return default do sizeof " +
+  var cKeywords = "auto if break case main continue return default do sizeof " +
     "static else struct switch extern typedef union for goto while enum const " +
     "volatile inline restrict asm fortran";
 

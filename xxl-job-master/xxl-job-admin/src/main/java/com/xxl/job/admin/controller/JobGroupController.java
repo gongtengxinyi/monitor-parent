@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * job group controller
+ * job group jobhandler
  * @author xuxueli 2016-10-02 20:52:56
  */
 @Controller

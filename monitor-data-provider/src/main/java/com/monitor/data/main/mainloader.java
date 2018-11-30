@@ -1,4 +1,4 @@
-package com.monitor.data.register;
+package com.monitor.data.main;
 
 import com.monitor.data.api.CommonService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

@@ -104,7 +104,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.monitor.data.register.mainloader</mainClass>
+                    <mainClass>com.monitor.data.main.mainloader</mainClass>
                 </configuration>
                 <executions>
                     <execution>
