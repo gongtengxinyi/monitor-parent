@@ -220,9 +220,24 @@
                 <artifactId>spring-session</artifactId>
                 <version>${spring-session-version}</version>
             </dependency>
+            <!-- xxl-job-core -->
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>1.8.2</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>groovy-all</artifactId>
+                        <groupId>org.codehaus.groovy</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+
         </dependencies>
     </dependencyManagement>
     <build>
+
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -268,5 +283,8 @@
         <module>monitor-data-domain</module>
         <module>monitor-utils</module>
         <module>monitor-client-test</module>
+        <module>monitor-job</module>
+        <module>monitor-sso</module>
+        <!--<module>xxl-job</module>-->
     </modules>
 </project>

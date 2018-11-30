@@ -24,7 +24,7 @@ import com.monitor.security.interceptor.UserSecurityInterceptor;
 @ImportResource({"classpath:applicationContext.xml", "dubbo-services.xml"})
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"com.monitor.*"})  //指定扫描包路径
-public class ParkingSpotDataTrans extends WebMvcConfigurerAdapter {
+public class MainLoader extends WebMvcConfigurerAdapter {
     /**
      * 跨域CORS配置
      * @param registry
