@@ -11,7 +11,7 @@
   http://www.springframework.org/schema/mvc  
   http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 	<!-- 自动扫描 -->
-	 <context:component-scan base-package="com.monitor.data.splitTable" />
+	 <context:component-scan base-package="com.monitor.data.**" />
 	<!-- 引入配置文件 -->
 	<!--<bean id="propertyConfigurer"-->
 		<!--class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
@@ -21,7 +21,7 @@
 	<context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="true" />
 	<context:property-placeholder location="classpath:redis.properties" ignore-unresolvable="true" />
 
-	<bean id="dataSource" class=" com.monitor.data.framework.ThreadLocalRountingDataSource">
+	<bean id="dataSource" class=" com.monitor.data.datasource.ThreadLocalRountingDataSource">
 		<property name="defaultTargetDataSource" ref="dataSource_master" />
 		<property name="targetDataSources">
 			<map key-type="java.lang.String">
@@ -92,7 +92,7 @@
 	<!-- Enables the use of the @AspectJ style of Spring AOP -->
 	<aop:aspectj-autoproxy/>
 
-	<bean id="dataSourceAspect" class="com.monitor.data.framework.DataSourceAspect">
+	<bean id="dataSourceAspect" class="com.monitor.data.datasource.DataSourceAspect">
 	</bean>
 
 	<aop:config>

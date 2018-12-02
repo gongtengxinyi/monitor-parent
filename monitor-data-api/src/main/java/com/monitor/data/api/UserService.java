@@ -1,8 +1,11 @@
 package com.monitor.data.api;
 
+import com.monitor.data.Response.MonitorResponse;
 import com.monitor.data.dto.UserDto;
+import com.monitor.data.pojo.User;
 import sun.jvm.hotspot.debugger.Page;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -84,4 +87,8 @@ public interface UserService{
 	* @return List<UserDto>
 	*/
 	public List<UserDto> queryUser(UserDto userDto);
+
+    MonitorResponse login(User user, HttpServletResponse response);
+
+    MonitorResponse getUserLoginToken(User user);
 }

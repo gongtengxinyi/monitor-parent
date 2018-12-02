@@ -1,4 +1,4 @@
-package com.monitor.data.framework;
+package com.monitor.data.datasource;
 
 /**
  * 数据源类型

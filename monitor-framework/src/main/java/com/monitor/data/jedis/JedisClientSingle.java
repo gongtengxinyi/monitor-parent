@@ -1,7 +1,8 @@
-package com.monitor.data.redis;
+package com.monitor.data.jedis;
 import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+
 public class JedisClientSingle implements JedisClient {
     @Autowired
     private JedisPool jedisPool;

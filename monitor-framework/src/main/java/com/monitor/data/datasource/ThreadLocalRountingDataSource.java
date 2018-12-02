@@ -1,4 +1,4 @@
-package com.monitor.data.framework;
+package com.monitor.data.datasource;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 

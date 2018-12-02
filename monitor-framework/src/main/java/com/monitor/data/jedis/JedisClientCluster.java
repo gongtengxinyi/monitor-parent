@@ -1,7 +1,5 @@
-package com.monitor.data.redis;
-import org.springframework.beans.factory.annotation.Autowired;
+package com.monitor.data.jedis;
 
-import redis.clients.jedis.JedisCluster;
 import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.JedisCluster;
 

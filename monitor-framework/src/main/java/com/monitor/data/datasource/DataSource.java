@@ -1,4 +1,4 @@
-package com.monitor.data.framework;
+package com.monitor.data.datasource;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

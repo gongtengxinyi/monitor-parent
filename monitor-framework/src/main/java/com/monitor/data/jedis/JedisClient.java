@@ -1,4 +1,4 @@
-package com.monitor.data.redis;
+package com.monitor.data.jedis;
 
 public interface JedisClient {
     //Redis SET命令用于在Redis键中设置一些字符串值

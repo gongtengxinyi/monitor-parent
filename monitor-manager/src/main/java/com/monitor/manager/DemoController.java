@@ -1,4 +1,4 @@
-package com.monitor.sso;
+package com.monitor.manager;
 
 import com.monitor.data.redis.JedisClientSingle;
 import org.springframework.beans.factory.annotation.Autowired;

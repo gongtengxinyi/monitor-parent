@@ -23,5 +23,10 @@
 	<!-- xml 配置文件， 对外发布的service接口部分 -->
 	<import resource="classpath*:/application-all.xml" />
 
+	<context:property-placeholder location="classpath:application.properties" ignore-unresolvable="true" />
 
+
+	<!--跨域拦截器-->
+	<bean id="allowCROShandleInterceptor" class="com.monitor.data.handlerinterceptor.AllowCrossDomainInterceptor">
+	</bean>
 </beans>

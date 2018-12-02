@@ -12,6 +12,12 @@
     <dependencies>
         <dependency>
             <groupId>com.skyeye</groupId>
+            <artifactId>monitor-framework</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.skyeye</groupId>
             <artifactId>monitor-data-api</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -91,6 +97,11 @@
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.3</version>
         </dependency>
     </dependencies>
     <build>
