@@ -291,6 +291,9 @@
         <module>monitor-client-test</module>
         <module>monitor-job</module>
         <module>monitor-sso</module>
+        <module>monitor-rest</module>
+        <module>monitor-portal</module>
+        <module>monitor-manager</module>
         <!--<module>xxl-job</module>-->
     </modules>
 </project>

@@ -2,11 +2,13 @@ package com.monitor.data.framework;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import java.lang.reflect.Method;
 @Order(0)
 public class DataSourceAspect {
-
+private Logger logger =LoggerFactory.getLogger(this.getClass());
     /**
      * 拦截目标方法，获取由@DataSource指定的数据源标识，设置到线程存储中以便切换数据源
      *
@@ -44,8 +46,7 @@ public class DataSourceAspect {
                 DataSourceTypeManager.setDataSource(source.value());
             }
         } catch (Exception e) {
-            System.out.println(clazz + ":" + e.getMessage());
+            e.printStackTrace();
         }
     }
-
 }

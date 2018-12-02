@@ -109,7 +109,7 @@
 	<bean id="strategyManager" class="com.monitor.data.splitTable.StrategyManager">
 		<property name="strategies">
 			<map>
-				<entry key="YYYY" value="com.monitor.data.splitTable.YYYYStrategy" />
+				<entry key="order" value="com.monitor.data.splitTable.OrderSplitStrategy" />
 			</map>
 		</property>
 	</bean>
