@@ -44,7 +44,7 @@
         </dependency>
         <dependency>
             <groupId>redis.clients</groupId>
-            <artifactId>com.monitor.data.jedis</artifactId>
+            <artifactId>jedis</artifactId>
         </dependency>
 
 

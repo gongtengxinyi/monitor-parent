@@ -40,7 +40,11 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.skyeye</groupId>
+            <artifactId>monitor-data-api</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.skyeye</groupId>
             <artifactId>monitor-utils</artifactId>

@@ -1,5 +1,6 @@
 package com.monitor.data.service;
 
+import com.alibaba.dubbo.container.page.Page;
 import com.google.gson.Gson;
 import com.monitor.data.Response.MonitorResponse;
 import com.monitor.data.api.UserService;
@@ -14,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import sun.jvm.hotspot.debugger.Page;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -51,6 +51,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public MonitorResponse getUserLoginToken(User user) {
         Long userId = user.getId();
+
+        return null;
+    }
+
+    @Override
+    public User getUserByLoginName(User user) {
 
         return null;
     }
@@ -101,10 +107,6 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    @Override
-    public List<UserDto> findPageList(Page page, UserDto userDto) {
-        return null;
-    }
 
     @Override
     public List<UserDto> queryUser(UserDto userDto) {

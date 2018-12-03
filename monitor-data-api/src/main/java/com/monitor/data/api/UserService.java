@@ -3,7 +3,6 @@ package com.monitor.data.api;
 import com.monitor.data.Response.MonitorResponse;
 import com.monitor.data.dto.UserDto;
 import com.monitor.data.pojo.User;
-import sun.jvm.hotspot.debugger.Page;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -74,13 +73,7 @@ public interface UserService{
 	* @return
 	*/
 	public Long deleteByPrimaryKey(Long id);
-	
-	/**
-	* 获取用户表 ForList(
-	* @param userDto
-	* @return List<UserDto>
-	*/
-	public List<UserDto> findPageList(Page page, UserDto userDto);
+
     	/**
 	* 获取用户表 ForList(
 	* @param userDto
@@ -91,4 +84,6 @@ public interface UserService{
     MonitorResponse login(User user, HttpServletResponse response);
 
     MonitorResponse getUserLoginToken(User user);
+
+    User getUserByLoginName(User user);
 }
