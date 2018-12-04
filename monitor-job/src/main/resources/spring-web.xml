@@ -35,7 +35,7 @@
 
 
 	<!-- xml 配置文件， 对外发布的service接口部分 -->
-	<import resource="classpath*:/application-all.xml" />
+	<import resource="classpath*:/application.xml" />
     <!--xxl-job环境配置-->
     <import resource="classpath:/applicationcontext-xxl-job.xml" />
 

@@ -15,7 +15,7 @@
 	<dubbo:protocol name="dubbo" port="20882" />
 
 	<!-- mybatis 相关 -->
-	<import resource="application-all.xml" />
+	<import resource="application.xml" />
 
 	<!-- 使用注解方式暴露接口 -->
 	<!-- <dubbo:annotation package="com.dearbinge.data" /> -->

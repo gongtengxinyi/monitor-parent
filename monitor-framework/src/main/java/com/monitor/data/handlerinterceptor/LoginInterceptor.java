@@ -3,7 +3,6 @@ package com.monitor.data.handlerinterceptor;
 import com.google.gson.Gson;
 import com.monitor.data.api.UserService;
 import com.monitor.data.appliocationContext.ApplicationContext;
-import com.monitor.data.jedis.JedisClientSingle;
 import com.monitor.data.pojo.User;
 import com.monitor.data.splitTable.ContextHelper;
 import com.monitor.data.util.PropertiesUtil;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -35,7 +33,7 @@ public class LoginInterceptor  implements HandlerInterceptor {
             User user = gson.fromJson(userJson, User.class);
             UserService userService = ContextHelper.getUserService();
             //获取登录的账号的userId 放到线程变量里
-            User userLogin = userService.getUserByLoginName(user);
+            User userLogin = userService.getUserByLoginId(user);
             //threadLocal 存储用户信息
             ApplicationContext.setUser(userLogin);
             return true;

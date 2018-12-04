@@ -10,6 +10,15 @@
     </parent>
     <artifactId>monitor-data-provider</artifactId>
     <dependencies>
+
+
+        <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.1.6</version>
+
+        </dependency>
         <dependency>
             <groupId>com.skyeye</groupId>
             <artifactId>monitor-framework</artifactId>
@@ -90,10 +99,10 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-        <dependency>
-            <groupId>commons-dbcp</groupId>
-            <artifactId>commons-dbcp</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>commons-dbcp</groupId>-->
+            <!--<artifactId>commons-dbcp</artifactId>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>

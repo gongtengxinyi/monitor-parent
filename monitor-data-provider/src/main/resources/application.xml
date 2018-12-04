@@ -31,41 +31,60 @@
 			</map>
 		</property>
 	</bean>
-
-	<bean id="dataSource_master" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
-		<property name="driverClassName" value="${driver}" />
+	<!-- 数据库连接池 -->
+	<bean id="dataSource_master" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+		<!-- 基本属性 url、user、password -->
 		<property name="url" value="${url}" />
 		<property name="username" value="${username}" />
 		<property name="password" value="${password}" />
-		<!-- 初始化连接大小 -->
-		<property name="initialSize" value="${initialSize}"></property>
-		<!-- 连接池最大数量 -->
-		<property name="maxActive" value="${maxActive}"></property>
-		<!-- 连接池最大空闲 -->
-		<property name="maxIdle" value="${maxIdle}"></property>
-		<!-- 连接池最小空闲 -->
-		<property name="minIdle" value="${minIdle}"></property>
-		<!-- 获取连接最大等待时间 -->
-		<property name="maxWait" value="${maxWait}"></property>
+		<property name="driverClassName" value="${driver}" />
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="${druid.initialSize}"/>
+		<property name="minIdle" value="${druid.minIdle}"/>
+		<property name="maxActive" value="${druid.maxActive}"/>
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="${druid.maxWait}"/>
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="${druid.timeBetweenEvictionRunsMillis}" />
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="${druid.minEvictableIdleTimeMillis}" />
+		<property name="validationQuery" value="${druid.validationQuery}" />
+		<property name="testWhileIdle" value="${druid.testWhileIdle}" />
+		<property name="testOnBorrow" value="${druid.testOnBorrow}" />
+		<property name="testOnReturn" value="${druid.testOnReturn}" />
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小  如果用Oracle，则把poolPreparedStatements配置为true，mysql可以配置为false。-->
+		<property name="poolPreparedStatements" value="${druid.poolPreparedStatements}" />
+		<property name="maxPoolPreparedStatementPerConnectionSize" value="${druid.maxPoolPreparedStatementPerConnectionSize}" />
+		<!-- 配置监控统计拦截的filters -->
+		<property name="filters" value="${druid.filters}" />
 	</bean>
 
-	<bean id="dataSource_slave" class="org.apache.commons.dbcp.BasicDataSource"
-		  destroy-method="close">
-		<property name="driverClassName" value="${driver}" />
+	<!-- 数据库连接池 -->
+	<bean id="dataSource_slave" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+		<!-- 基本属性 url、user、password -->
 		<property name="url" value="${url2}" />
 		<property name="username" value="${username2}" />
 		<property name="password" value="${password2}" />
-		<!-- 初始化连接大小 -->
-		<property name="initialSize" value="${initialSize}"></property>
-		<!-- 连接池最大数量 -->
-		<property name="maxActive" value="${maxActive}"></property>
-		<!-- 连接池最大空闲 -->
-		<property name="maxIdle" value="${maxIdle}"></property>
-		<!-- 连接池最小空闲 -->
-		<property name="minIdle" value="${minIdle}"></property>
-		<!-- 获取连接最大等待时间 -->
-		<property name="maxWait" value="${maxWait}"></property>
+		<property name="driverClassName" value="${driver}" />
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="${druid.initialSize}"/>
+		<property name="minIdle" value="${druid.minIdle}"/>
+		<property name="maxActive" value="${druid.maxActive}"/>
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="${druid.maxWait}"/>
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="${druid.timeBetweenEvictionRunsMillis}" />
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="${druid.minEvictableIdleTimeMillis}" />
+		<property name="validationQuery" value="${druid.validationQuery}" />
+		<property name="testWhileIdle" value="${druid.testWhileIdle}" />
+		<property name="testOnBorrow" value="${druid.testOnBorrow}" />
+		<property name="testOnReturn" value="${druid.testOnReturn}" />
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小  如果用Oracle，则把poolPreparedStatements配置为true，mysql可以配置为false。-->
+		<property name="poolPreparedStatements" value="${druid.poolPreparedStatements}" />
+		<property name="maxPoolPreparedStatementPerConnectionSize" value="${druid.maxPoolPreparedStatementPerConnectionSize}" />
+		<!-- 配置监控统计拦截的filters -->
+		<property name="filters" value="${druid.filters}" />
 	</bean>
 
 	<!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->

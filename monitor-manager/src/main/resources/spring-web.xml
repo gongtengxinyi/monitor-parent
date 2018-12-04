@@ -15,15 +15,21 @@
 		(1)自动注册DefaultAnootationHandlerMapping,AnotationMethodHandlerAdapter 
 		(2)提供一些列：数据绑定，数字和日期的format @NumberFormat, @DateTimeFormat, xml,json默认读写支持 
 	-->
-	<mvc:annotation-driven />
+	<mvc:interceptors>
+		<bean class="com.monitor.data.handlerinterceptor.LoginInterceptor" />
+	</mvc:interceptors>
 	<mvc:default-servlet-handler/>
 	<!-- 4.扫描web相关的bean -->
 	<context:component-scan base-package="com.monitor.**" />
 
 	<!-- xml 配置文件， 对外发布的service接口部分 -->
-	<import resource="classpath*:/application-all.xml" />
+	<import resource="classpath*:/application.xml" />
 
 	<!--跨域拦截器-->
 	<bean id="allowCROShandleInterceptor" class="com.monitor.data.handlerinterceptor.AllowCrossDomainInterceptor">
 	</bean>
+
+	<!--&lt;!&ndash;跨域拦截器&ndash;&gt;-->
+	<!--<bean id="loginInterceptor" class="com.monitor.data.handlerinterceptor.LoginInterceptor">-->
+	<!--</bean>-->
 </beans>

@@ -21,7 +21,7 @@
 	 <context:component-scan base-package="com.monitor.portal" />
 
 	<!-- xml 配置文件， 对外发布的service接口部分 -->
-	<import resource="classpath*:/application-all.xml" />
+	<import resource="classpath*:/application.xml" />
 
 
 </beans>

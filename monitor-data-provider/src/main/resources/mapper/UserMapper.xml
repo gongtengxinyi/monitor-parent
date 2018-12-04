@@ -162,7 +162,6 @@
 	<include refid="Base_Column_List"/>
 	from user 
 	<where> 
-    	is_delete=0
     <if test="id != null and id != ''" >
         and id = #{id,jdbcType=BIGINT}
     </if>
@@ -178,10 +177,10 @@
     <if test="email != null and email != ''" >
         and email = #{email,jdbcType=VARCHAR}
     </if>
-    <if test="created != null and created != ''" >
+    <if test="created != null" >
         and created = #{created,jdbcType=TIMESTAMP}
     </if>
-    <if test="updated != null and updated != ''" >
+    <if test="updated != null" >
         and updated = #{updated,jdbcType=TIMESTAMP}
     </if>
     </where>

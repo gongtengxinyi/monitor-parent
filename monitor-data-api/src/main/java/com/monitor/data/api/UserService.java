@@ -85,5 +85,5 @@ public interface UserService{
 
     MonitorResponse getUserLoginToken(User user);
 
-    User getUserByLoginName(User user);
+    User getUserByLoginId(User user);
 }

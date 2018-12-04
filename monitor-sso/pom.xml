@@ -11,6 +11,13 @@
     <packaging>war</packaging>
     <artifactId>monitor-sso</artifactId>
     <dependencies>
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/com.alibaba/druid &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>com.alibaba</groupId>-->
+            <!--<artifactId>druid</artifactId>-->
+            <!--<version>1.0.9</version>-->
+        <!--</dependency>-->
+        <!---->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
@@ -44,6 +51,24 @@
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.skyeye</groupId>
+            <artifactId>monitor-data-domain</artifactId>
+            <version>1.0.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.skyeye</groupId>
+            <artifactId>monitor-data-api</artifactId>
+            <version>1.0.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.skyeye</groupId>
+            <artifactId>monitor-framework</artifactId>
+            <version>1.0.0.0</version>
+            <scope>compile</scope>
         </dependency>
 
 

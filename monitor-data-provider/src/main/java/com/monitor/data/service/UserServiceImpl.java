@@ -1,6 +1,5 @@
 package com.monitor.data.service;
 
-import com.alibaba.dubbo.container.page.Page;
 import com.google.gson.Gson;
 import com.monitor.data.Response.MonitorResponse;
 import com.monitor.data.api.UserService;
@@ -10,6 +9,7 @@ import com.monitor.data.jedis.JedisClientSingle;
 import com.monitor.data.jedis.JedisUtil;
 import com.monitor.data.pojo.User;
 import com.sky.utils.CookieUtils;
+import com.sky.utils.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +32,14 @@ public class UserServiceImpl implements UserService {
     public MonitorResponse login(User user, HttpServletResponse response) {
         User userSearch =checkUserPasswd(user);
         try {
+            if(userSearch==null){
+                return  MonitorResponse.error(null,"没有找到该用户或者用户不存在");
+            }
             Gson gson=new Gson();
             String loginToken = JedisUtil.getLoginToken(userSearch.getId());
-            userSearch.setPassword(null);//清空密码
-            String userJson = gson.toJson(userSearch);
+           User userCookie=new User();
+           userCookie.setId(userSearch.getId());
+            String userJson = gson.toJson(userCookie);
             jedisClientSingle.set(loginToken,userJson);
             jedisClientSingle.expire(loginToken,Integer.parseInt(expireTime));
             CookieUtils.setCookie(response,CookieUtils.USER_COOKIE
@@ -56,13 +60,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByLoginName(User user) {
-
+    public User getUserByLoginId(User user) {
+        List<User> users = userDao.queryUser(user);
+        if(users!=null&&users.size()>0){
+            return  users.get(0);
+        }
         return null;
     }
 
     private User checkUserPasswd(User user) {
-        User userData=new User();
+        User userData=null;
+        String password = user.getPassword();
+        //清空password 当做筛选实体类
+        user.setPassword(null);
+        List<User> users = userDao.queryUser(user);
+        if(users!=null&&users.size()>0){
+            userData=users.get(0);
+            if(StringUtil.equals(userData.getPassword(),password)){
+                return userData;
+            }else {
+                return null;
+            }
+        }
         return userData;
     }
 
