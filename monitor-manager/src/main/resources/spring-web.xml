@@ -8,28 +8,67 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context.xsd
 	http://www.springframework.org/schema/mvc
-	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+	http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
 	<!-- 配置SpringMVC -->
 	<!-- 1.开启SpringMVC注解模式 -->
 	<!-- 简化配置： 
 		(1)自动注册DefaultAnootationHandlerMapping,AnotationMethodHandlerAdapter 
 		(2)提供一些列：数据绑定，数字和日期的format @NumberFormat, @DateTimeFormat, xml,json默认读写支持 
 	-->
-	<mvc:interceptors>
-		<bean class="com.monitor.data.handlerinterceptor.LoginInterceptor" />
-	</mvc:interceptors>
+	<mvc:annotation-driven />
 	<mvc:default-servlet-handler/>
 	<!-- 4.扫描web相关的bean -->
 	<context:component-scan base-package="com.monitor.**" />
 
+	<!-- REST中根据URL后缀自动判定Content-Type及相应的View -->
+	<bean id="contentNegotiationManager"
+		  class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+		<property name="mediaTypes">
+			<map>
+				<entry key="xml" value="application/xml" />
+				<entry key="json" value="application/json" />
+			</map>
+		</property>
+		<property name="ignoreAcceptHeader" value="true" />
+		<property name="favorPathExtension" value="true" />
+	</bean>
+
+	<!-- 默认的注解映射的支持，org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping -->
+	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
+		<mvc:message-converters register-defaults="true">
+			<!-- 将StringHttpMessageConverter的默认编码设为UTF-8 -->
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<constructor-arg value="UTF-8" />
+			</bean>
+			<!-- 输出对象转JSON支持 -->
+			<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json;charset=UTF-8</value>
+						<value>application/x-www-form-urlencoded;charset=UTF-8</value>
+					</list>
+				</property>
+				<property name="fastJsonConfig.serializerFeatures">
+					<list>
+						<!-- 使得返回的日期类型默认为yyyy-MM-dd hh:mm:ss）特殊的用@JSONField(format = "yyyy-MM-dd") -->
+						<value>WriteDateUseDateFormat</value>
+						<!--FastJson不循环引用-->
+						<value>DisableCircularReferenceDetect</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
 	<!-- xml 配置文件， 对外发布的service接口部分 -->
-	<import resource="classpath*:/application.xml" />
+	<import resource="classpath*:/application-all.xml" />
 
 	<!--跨域拦截器-->
 	<bean id="allowCROShandleInterceptor" class="com.monitor.data.handlerinterceptor.AllowCrossDomainInterceptor">
 	</bean>
 
-	<!--&lt;!&ndash;跨域拦截器&ndash;&gt;-->
-	<!--<bean id="loginInterceptor" class="com.monitor.data.handlerinterceptor.LoginInterceptor">-->
-	<!--</bean>-->
+	<!--  swagger静态文件路径 -->
+	<mvc:resources mapping="/swagger/**" location="/WEB-INF/swagger/" cache-period="31556926"/>
+	<mvc:default-servlet-handler />
+	<bean class="com.monitor.data.swaggerConfig.SwaggerConfig" />
 </beans>
