@@ -1,6 +1,5 @@
 package com.monitor.data.splitTable;
 
-import com.monitor.data.pojo.Order;
 import com.sky.utils.StringUtil;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
@@ -54,13 +53,13 @@ public class TableSplitInterceptor implements Interceptor {
 
     private void doSplitTable(MetaObject metaStatementHandler,BoundSql boundSql) throws ClassNotFoundException{
         String originalSql = (String) metaStatementHandler.getValue("delegate.boundSql.sql");
-        Order order =(Order) boundSql.getParameterObject();
+        Object object = boundSql.getParameterObject();
 
         if (originalSql != null && !originalSql.equals("")) {
-            if(order==null){
-                logger.error("语句{} 参数对象order为空",originalSql);
-                return;
-            }
+//            if(order==null){
+//                logger.error("语句{} 参数对象order为空",originalSql);
+//                return;
+//            }
             String logOriginalSql=StringUtil.deleteBlank(originalSql);
             logger.info("分表前的SQL："+logOriginalSql);
             MappedStatement mappedStatement = (MappedStatement) metaStatementHandler.getValue("delegate.mappedStatement");
@@ -73,7 +72,7 @@ public class TableSplitInterceptor implements Interceptor {
                 StrategyManager strategyManager = ContextHelper.getStrategyManager();
                 Strategy strategy=strategyManager.getStrategy(tableSplit.strategy());//获取分表策略来处理分表
                 //开始埋坑
-                String convertedSql=originalSql.replaceAll(tableSplit.value(), strategy.convert(tableSplit.value(),order,boundSql));
+                String convertedSql=originalSql.replaceAll(tableSplit.value(), strategy.convert(tableSplit.value(),object,boundSql));
                 metaStatementHandler.setValue("delegate.boundSql.sql",convertedSql);
                 String convertSqlLog=StringUtil.deleteBlank(convertedSql);
                 logger.info("分表后的SQL："+convertSqlLog);
