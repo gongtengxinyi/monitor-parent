@@ -8,7 +8,6 @@ import com.monitor.data.dto.UserDto;
 import com.monitor.data.jedis.JedisClientSingle;
 import com.monitor.data.jedis.JedisUtil;
 import com.monitor.data.pojo.User;
-import com.sky.utils.CookieUtils;
 import com.sky.utils.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,15 +36,14 @@ public class UserServiceImpl implements UserService {
             }
             Gson gson=new Gson();
             String loginToken = JedisUtil.getLoginToken(userSearch.getId());
-           User userCookie=new User();
-           userCookie.setId(userSearch.getId());
-            String userJson = gson.toJson(userCookie);
+            String userJson = gson.toJson(userSearch);
             jedisClientSingle.set(loginToken,userJson);
             jedisClientSingle.expire(loginToken,Integer.parseInt(expireTime));
-            CookieUtils.setCookie(response,CookieUtils.USER_COOKIE
-                    ,userJson,Integer.parseInt(expireTime));
+//            userJson="dddd";
+//            CookieUtils.setCookie(response,CookieUtils.USER_COOKIE
+//                    ,userJson,Integer.parseInt(expireTime));
             logger.info("用户{}登录成功，成功写入token",user.getUsername());
-            return  MonitorResponse.success();
+            return  MonitorResponse.success(userSearch);
         } catch (Exception e) {
             e.printStackTrace();
             return MonitorResponse.error(userSearch,"登录写入token失败");
@@ -126,10 +124,14 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-
     @Override
     public List<UserDto> queryUser(UserDto userDto) {
         return null;
+    }
+
+    @Override
+    public List<User> findListByDto(UserDto userDto) {
+        return userDao.findListByDto(userDto);
     }
 
 

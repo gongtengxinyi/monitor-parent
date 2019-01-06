@@ -3,6 +3,8 @@ package com.monitor.data.handlerinterceptor;
 import com.google.gson.Gson;
 import com.monitor.data.api.UserService;
 import com.monitor.data.appliocationContext.ApplicationContext;
+import com.monitor.data.jedis.JedisClientSingle;
+import com.monitor.data.jedis.JedisUtil;
 import com.monitor.data.pojo.User;
 import com.monitor.data.splitTable.ContextHelper;
 import com.monitor.data.util.PropertiesUtil;
@@ -18,22 +20,32 @@ import javax.servlet.http.HttpServletResponse;
  * 登录拦截器
  */
 @Component
-public class LoginInterceptor  implements HandlerInterceptor {
+public class LoginInterceptor implements HandlerInterceptor {
+
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         //从cookie中获取登录的userJson
-        String userJson = CookieUtils.getCookieValue(httpServletRequest, CookieUtils.USER_COOKIE);
-        if(userJson==null){
+        String userId = CookieUtils.getCookieValue(httpServletRequest, CookieUtils.USER_COOKIE);
+        if (userId == null) {
             // sysConfig.properties(配置文件)
             PropertiesUtil p = new PropertiesUtil("important.properties");
             String loginUrl = (String) p.getProperties().get("LOGIN_URL");
             httpServletResponse.sendRedirect(loginUrl);
+            //前段读取token做登录认证
             return false;
-        }else {
-            Gson gson =new Gson();
-            User user = gson.fromJson(userJson, User.class);
-            UserService userService = ContextHelper.getUserService();
-            //获取登录的账号的userId 放到线程变量里
-            User userLogin = userService.getUserByLoginId(user);
+        } else {
+            JedisClientSingle jedis = ContextHelper.getJedis();
+            User userLogin =null;
+            String userToken = jedis.get(JedisUtil.getLoginToken(Long.parseLong(userId)));
+            if(userToken!=null){
+                Gson gson =new Gson();
+                userLogin= gson.fromJson(userToken, User.class);
+            }else {
+                User user = new User();
+                user.setId(Long.parseLong(userId));
+                UserService userService = ContextHelper.getUserService();
+                //获取登录的账号的userId 放到线程变量里
+                userLogin = userService.getUserByLoginId(user);
+            }
             //threadLocal 存储用户信息
             ApplicationContext.setUser(userLogin);
             return true;

@@ -64,10 +64,10 @@
 	<import resource="classpath*:/application.xml" />
 
 	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<bean class="com.monitor.data.handlerinterceptor.LoginInterceptor" />
-		       </mvc:interceptor>
+		<!--<mvc:interceptor>-->
+			<!--<mvc:mapping path="/**" />-->
+			<!--<bean class="com.monitor.data.handlerinterceptor.LoginInterceptor" />-->
+		       <!--</mvc:interceptor>-->
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<bean class="com.monitor.data.handlerinterceptor.AllowCrossDomainInterceptor" />
@@ -77,5 +77,5 @@
 	<!--  swagger静态文件路径 -->
 	<mvc:resources mapping="/swagger/**" location="/WEB-INF/swagger/" cache-period="31556926"/>
 	<mvc:default-servlet-handler />
-	<bean class="com.monitor.data.swaggerConfig.SwaggerConfig" />
+	<bean class="com.monitor.swaggerConfig.SwaggerConfig" />
 </beans>

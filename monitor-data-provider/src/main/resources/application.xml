@@ -137,5 +137,6 @@
 	</bean>
      <!--引入redis-->
 	<import resource="classpath:/spring-redis.xml" />
+	<import resource="classpath*:/spring-rabbitMq-producer.xml" />
 
 </beans>

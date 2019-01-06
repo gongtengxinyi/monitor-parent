@@ -1,6 +1,7 @@
 package com.monitor.data.dao;
 
 
+import com.monitor.data.dto.UserDto;
 import com.monitor.data.pojo.User;
 
 import java.util.List;
@@ -45,4 +46,6 @@ public interface UserDao {
 	* @return
 	*/
 	public int delete(User user);
+
+	List<User> findListByDto(UserDto userDto);
 }

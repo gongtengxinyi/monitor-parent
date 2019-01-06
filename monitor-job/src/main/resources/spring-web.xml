@@ -39,5 +39,8 @@
     <!--xxl-job环境配置-->
     <import resource="classpath:/applicationcontext-xxl-job.xml" />
 
+	<!--rabbitmq 消费组-->
+	<import resource="classpath*:/spring-rabbitMq-consumer.xml" />
+
 
 </beans>

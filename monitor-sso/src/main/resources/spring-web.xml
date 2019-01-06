@@ -65,7 +65,7 @@
 	</mvc:annotation-driven>
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/" />
+			<mvc:mapping path="/**" />
 			<bean class="com.monitor.data.handlerinterceptor.AllowCrossDomainInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>

@@ -11,7 +11,7 @@
     <context:property-placeholder location="classpath:rabbitmq.properties" ignore-unresolvable="true" />
     <!--配置connection-factory，指定连接rabbit server参数 -->
     <rabbit:connection-factory id="connectionFactory" virtual-host="${virtualhost}"
-                               username="${username}" password="${password}" host="${host}" port="${port}"/>
+                               username="root" password="123456" host="${host}" port="${port}"/>
     <!-- <rabbit:connection-factory id="connectionFactory"
          username="test2" password="test2"
         host="123.206.228.200" port="5672" /> -->
@@ -22,12 +22,21 @@
     <!--定义queue -->
     <rabbit:queue name="queueTest" durable="true" auto-delete="false"
                   exclusive="false" declared-by="connectAdmin" />
-
+    <!--<rabbit:queue id="activity" name="activity" durable="true" auto-delete="false" exclusive="false" />-->
+    <!--<rabbit:queue id="mail" name="mail" durable="true" auto-delete="false" exclusive="false" />-->
+    <!--<rabbit:queue id="stock" name="stock" durable="true" auto-delete="false" exclusive="false" />-->
+    <!--<rabbit:queue id="autoPrint" name="autoPrint" durable="true" auto-delete="false" exclusive="false" />-->
+ <!---->
     <!-- 定义direct exchange，绑定queueTest -->
     <rabbit:direct-exchange name="exchangeTest"
                             durable="true" auto-delete="false" declared-by="connectAdmin">
         <rabbit:bindings>
             <rabbit:binding queue="queueTest" key="${ORDER_ROUTEING_KEY}"/>
+            <!--<rabbit:binding queue="order" key="order"/>-->
+            <!--<rabbit:binding queue="activity" key="activity"/>-->
+            <!--<rabbit:binding queue="mail" key="mail"/>-->
+            <!--<rabbit:binding queue="stock" key="stock"/>-->
+            <!--<rabbit:binding queue="autoPrint" key="autoPrint"/>-->
         </rabbit:bindings>
     </rabbit:direct-exchange>
 
@@ -39,10 +48,16 @@
     <bean id="messageConsumer" class="com.monitor.data.rabbitmq.Consumer"></bean>
     <!-- 消息接收者 -->
     <bean id="messageProducer" class="com.monitor.data.rabbitmq.Producer"></bean>
+    <bean id="rabbitHanderMessager" class="com.monitor.data.rabbitmq.RabbitHanderMessager"></bean>
+
     <!-- queue litener 观察 监听模式 当有消息到达时会通知监听在对应的队列上的监听对象 -->
     <rabbit:listener-container
             connection-factory="connectionFactory" acknowledge="manual">
         <rabbit:listener queues="queueTest" ref="messageConsumer" />
+        <!--<rabbit:listener queues="order" ref="orderListener"/>-->
+        <!--<rabbit:listener queues="mail" ref="mailListener"/>-->
+        <!--<rabbit:listener queues="stock" ref="stockListener"/>-->
+        <!--<rabbit:listener queues="autoPrint" ref="autoPrintListener"/>-->
     </rabbit:listener-container>
 
     <!--&lt;!&ndash;定义queue &ndash;&gt;-->

@@ -1,4 +1,4 @@
-package com.monitor.data.swaggerConfig;
+package com.monitor.swaggerConfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -23,13 +23,13 @@ public class SwaggerConfig {
     }
 
     private ApiInfo apiInfo() {
-        Contact contact = new Contact("老王", "https://www.baidu.me", "baidu_666@icloud.com");
-        return new ApiInfo("Blog前台API接口",//大标题 title
-                "Swagger测试demo",//小标题
+        Contact contact = new Contact("dingjianlei", "https://www.baidu.me", "baidu_666@icloud.com");
+        return new ApiInfo("monitor前台API接口",//大标题 title
+                "Swagger-monitor",//小标题
                 "0.0.1",//版本
                 "www.baidu.com",//termsOfServiceUrl
                 contact,//作者
-                "Blog",//链接显示文字
+                "monitor管理后台",//链接显示文字
                 "https://www.baidu.me"//网站链接
         );
     }

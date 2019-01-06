@@ -86,4 +86,11 @@ public interface UserService{
     MonitorResponse getUserLoginToken(User user);
 
     User getUserByLoginId(User user);
+
+	/**
+	 * 获取分页list
+	 * @param userDto
+	 * @return
+	 */
+	public List<User> findListByDto(UserDto userDto);
 }

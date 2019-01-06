@@ -21,7 +21,7 @@ public class LoginController {
     private UserService userService;
     @RequestMapping("login")
     @ResponseBody
-    public MonitorResponse login( User user, HttpServletResponse response) {
+    public MonitorResponse login(@RequestBody User user, HttpServletResponse response) {
       return  userService.login(user,response);
     }
 

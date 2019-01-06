@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/rabbit
+     http://www.springframework.org/schema/rabbit/spring-rabbit-1.2.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--读取rabbitmq 的配置文件-->
+    <context:property-placeholder location="classpath:rabbitmq.properties" ignore-unresolvable="true" />
+    <!--配置connection-factory，指定连接rabbit server参数 -->
+    <rabbit:connection-factory id="connectionFactory" virtual-host="${virtualhost}"
+                               username="root" password="123456" host="${host}" port="${port}"/>
+    <!-- <rabbit:connection-factory id="connectionFactory"
+         username="test2" password="test2"
+        host="123.206.228.200" port="5672" /> -->
+
+    <!--通过指定下面的admin信息，当前producer中的exchange和queue会在rabbitmq服务器上自动生成 -->
+    <rabbit:admin id="connectAdmin" connection-factory="connectionFactory" />
+
+    <!--定义queue -->
+    <rabbit:queue name="queueTest" durable="true" auto-delete="false"
+                  exclusive="false" declared-by="connectAdmin" />
+    <!--<rabbit:queue id="activity" name="activity" durable="true" auto-delete="false" exclusive="false" />-->
+    <!--<rabbit:queue id="mail" name="mail" durable="true" auto-delete="false" exclusive="false" />-->
+    <!--<rabbit:queue id="stock" name="stock" durable="true" auto-delete="false" exclusive="false" />-->
+    <!--<rabbit:queue id="autoPrint" name="autoPrint" durable="true" auto-delete="false" exclusive="false" />-->
+ <!---->
+    <!-- 定义direct exchange，绑定queueTest -->
+    <rabbit:direct-exchange name="exchangeTest"
+                            durable="true" auto-delete="false" declared-by="connectAdmin">
+        <rabbit:bindings>
+            <rabbit:binding queue="queueTest" key="${ORDER_ROUTEING_KEY}"/>
+            <!--<rabbit:binding queue="order" key="order"/>-->
+            <!--<rabbit:binding queue="activity" key="activity"/>-->
+            <!--<rabbit:binding queue="mail" key="mail"/>-->
+            <!--<rabbit:binding queue="stock" key="stock"/>-->
+            <!--<rabbit:binding queue="autoPrint" key="autoPrint"/>-->
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
+
+    <!--定义rabbit template用于数据的接收和发送 -->
+    <rabbit:template id="amqpTemplate" connection-factory="connectionFactory"
+                     exchange="exchangeTest" />
+    <!-- 消息接收者 -->
+    <bean id="messageProducer" class="com.monitor.data.rabbitmq.Producer"></bean>
+</beans>

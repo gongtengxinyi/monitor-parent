@@ -184,6 +184,35 @@
         and updated = #{updated,jdbcType=TIMESTAMP}
     </if>
     </where>
-  </select>  
-  <!-- 更新用户表 忽略传入空值 -->    
+  </select>
+
+    <select id="findListByDto"  parameterType="UserDto" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        <where>
+            <if test="id != null and id != ''" >
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="username != null and username != ''" >
+                and username = #{username,jdbcType=VARCHAR}
+            </if>
+            <if test="password != null and password != ''" >
+                and password = #{password,jdbcType=VARCHAR}
+            </if>
+            <if test="phone != null and phone != ''" >
+                and phone = #{phone,jdbcType=VARCHAR}
+            </if>
+            <if test="email != null and email != ''" >
+                and email = #{email,jdbcType=VARCHAR}
+            </if>
+            <if test="created != null" >
+                and created = #{created,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updated != null" >
+                and updated = #{updated,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+    <!-- 更新用户表 忽略传入空值 -->
 </mapper>

@@ -3,14 +3,14 @@ package com.sky.utils;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class CookieUtils {
     public static final int COOKIE_MAX_AGE = 7 * 24 * 3600;
     public static final int COOKIE_HALF_HOUR = 30 * 60;
-    public static  final String USER_COOKIE="MONITOR_SSO_USER";
+    public static  final String USER_COOKIE="MONITORSSOUSER";
+    public static  final String USER_COOKIE_DOMAIN="http://localhost:9529/";
     /**
      * 根据Cookie名称得到Cookie对象，不存在该对象则返回Null
      *
@@ -86,17 +86,18 @@ public class CookieUtils {
         }
         Cookie cookie = new Cookie(name, value);
         cookie.setPath("/");
+        cookie.setDomain(USER_COOKIE_DOMAIN);
         if (maxValue != 0) {
             cookie.setMaxAge(maxValue);
         } else {
             cookie.setMaxAge(COOKIE_HALF_HOUR);
         }
         response.addCookie(cookie);
-        try {
-            response.flushBuffer();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+////            response.flushBuffer();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     /**

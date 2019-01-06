@@ -1,9 +1,15 @@
 package com.monitor.data.main;
 
-import com.monitor.data.api.CommonService;
+import com.google.gson.Gson;
+import com.monitor.data.pojo.Order;
+import com.monitor.data.rabbitmq.Producer;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.test.context.web.WebAppConfiguration;
 
+import java.io.IOException;
+import java.util.Date;
 import java.util.Scanner;
+@WebAppConfiguration
 
 public class mainloader {
 
@@ -12,8 +18,19 @@ public class mainloader {
         ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("dubbo-spring-mybatis.xml");
         ctx.refresh();
         ctx.start();
-        CommonService bean = ctx.getBean(CommonService.class);
-        String userTest = bean.getUserTest();
+        Producer producer = ctx.getBean(Producer.class);
+        try {
+            Gson gson =new Gson();
+            Order order =new Order();
+            order.setId(1l);
+            order.setPayment("dd");
+            order.setCloseTime(new Date());
+            order.setBuyerNick("dd");
+            String s = gson.toJson(order);
+            producer.sendMessage(s);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Scanner scan = new Scanner(System.in);
         System.out.println("service started");
         Boolean wait = true;

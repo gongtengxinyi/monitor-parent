@@ -4,8 +4,11 @@ import com.rabbitmq.client.Channel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessageListener;
 import org.springframework.amqp.rabbit.core.ChannelAwareMessageListener;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.io.IOException;
+import java.util.Date;
 
 /**
  * 特点：只有服务端收到确认信号
@@ -34,18 +37,33 @@ import org.springframework.amqp.rabbit.core.ChannelAwareMessageListener;
  */
 public class Consumer implements ChannelAwareMessageListener {
     private static Logger logger = LoggerFactory.getLogger(Consumer.class);
+@Autowired
+private RabbitHanderMessager rabbitHanderMessager;
+    public void onMessage(Message message, Channel channel) {
 
-    public void onMessage(Message message, Channel channel) throws Exception {
-        long deliveryTag = message.getMessageProperties().getDeliveryTag();
-//        throw new IllegalArgumentException("Illegal");
-        //确认
-        channel.basicAck(deliveryTag, false);
-        //否认 调用basicNack后，会收到rabbitmq重发的消息
-        channel.basicNack(deliveryTag, false, true);
-        //重新放入队列
-        //channel.basicNack(envelope.getDeliveryTag(), false, true);
-        //抛弃此条消息
-        //channel.basicNack(envelope.getDeliveryTag(), false, false);
-        channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
+        try {
+            long deliveryTag = message.getMessageProperties().getDeliveryTag();
+            if(message==null){
+                logger.info("消息体mesage为空");
+                return;
+            }
+            String receiveMessage=new String(message.getBody());
+            logger.info("接收到消息{}，消息体是{}",deliveryTag,receiveMessage);
+            //确认
+            channel.basicAck(deliveryTag, false);
+            long startTime=System.currentTimeMillis();   //获取开始时间
+            logger.info(" >>>>>>>>>>>>>消费{},时间{}开始",receiveMessage,new Date());
+            rabbitHanderMessager.handleOrderMessage(deliveryTag,channel,receiveMessage);
+            long endTime=System.currentTimeMillis(); //获取结束时间
+            logger.info(" >>>>>>>>>>>>>消费{},时间{}结束。耗时{}ms",receiveMessage,new Date(),(endTime-startTime));
+            //否认 调用basicNack后，会收到rabbitmq重发的消息
+            //channel.basicNack(deliveryTag, false, true);
+            //重新放入队列
+            //channel.basicNack(envelope.getDeliveryTag(), false, true);
+            //抛弃此条消息
+            //channel.basicNack(envelope.getDeliveryTag(), false, false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
